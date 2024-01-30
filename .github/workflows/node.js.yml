@@ -31,6 +31,12 @@ jobs:
         GITHUB_OUTPUT: output.txt # Adjust output file path if needed
       run: ./build-and-push.sh
       # run: "# Build a docker container and\n# push it to ECR so that it can\n# be deployed to ECS.\ndocker build -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .\ndocker push $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG\necho \"image=$ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG\" >> $GITHUB_OUTPUT    \n#magic___^_^___line\n"
+    - name: Stop existing Docker container
+      run: docker stop $(docker ps -q) || true
+
+    - name: Remove existing Docker container
+      run: docker rm $(docker ps -q) || true
+
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
