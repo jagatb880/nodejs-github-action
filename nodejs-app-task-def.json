@@ -8,8 +8,8 @@
             "portMappings": [
                 {
                     "name": "port-5000",
-                    "containerPort": 0,
-                    "hostPort": 5000,
+                    "containerPort": 5000,
+                    "hostPort": 3000,
                     "protocol": "tcp",
                     "appProtocol": "http"
                 }
