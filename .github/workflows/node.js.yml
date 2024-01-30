@@ -15,7 +15,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: 'us-east-1'
+        aws-region: ${{ secrets.AWS_REGION }}
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
@@ -28,12 +28,14 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: latest
         REPOSITORY: nodejs-app
-      run: "# Build a docker container and\n# push it to ECR so that it can\n# be deployed to ECS.\ndocker build -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .\ndocker push $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG\necho \"image=$ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG\" >> $GITHUB_OUTPUT    \n#magic___^_^___line\n"
+        GITHUB_OUTPUT: output.txt # Adjust output file path if needed
+      run: ./build-and-push.sh
+      # run: "# Build a docker container and\n# push it to ECR so that it can\n# be deployed to ECS.\ndocker build -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .\ndocker push $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG\necho \"image=$ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG\" >> $GITHUB_OUTPUT    \n#magic___^_^___line\n"
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: nodejs-app-task-def.json
+        task-definition: arn:aws:ecs:us-east-1:708287751177:task-definition/nodejs-app-task-def:19
         container-name: nodejs-app-container
         image: ${{ steps.build-image.outputs.image }}
     - name: Deploy Amazon ECS task definition

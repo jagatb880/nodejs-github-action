@@ -44,7 +44,7 @@ async function main() {
 main();
 
 app.get('/', (req, res) => {
-    res.send('<h1>Hello, World!</h1>');
+    res.send('<h1>Hello, World! NodeJS</h1>');
 });
 
 app.get('/get', (req, res) => {
