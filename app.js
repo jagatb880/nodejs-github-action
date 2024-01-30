@@ -47,6 +47,10 @@ app.get('/', (req, res) => {
     res.send('<h1>Hello, World!</h1>');
 });
 
+app.get('/get', (req, res) => {
+    res.send('<h1>Node js application deployed in ecs</h1>');
+});
+
 // Start the Express server
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
