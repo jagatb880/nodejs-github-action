@@ -4,6 +4,7 @@
 *.tfplan
 *.terraform.lock.hcl
 .terraform/
+*.terraform.tfstate.lock.info
 darwin_amd64/
 
 # Global ignore for local override files
