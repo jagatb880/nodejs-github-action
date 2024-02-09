@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/get', (req, res) => {
-    res.send('<h1>Node js application deployed in ECS</h1>');
+    res.send('<h1>Node js application deployed in ECS using GitAction</h1>');
 });
 
 // Start the Express server

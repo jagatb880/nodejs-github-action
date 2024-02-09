@@ -61,7 +61,7 @@ resource "aws_route_table_association" "public" {
 
 # Create an ECS cluster
 resource "aws_ecs_cluster" "my_cluster" {
-  name = "nodejs-app-cluster"
+  name = "ngapro-app-cluster"
 }
 
 # --- ECS Node Role ---

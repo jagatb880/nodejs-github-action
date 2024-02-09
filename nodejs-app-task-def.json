@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:708287751177:task-definition/demo-app:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:708287751177:task-definition/ngapro-app:2",
     "containerDefinitions": [
         {
             "name": "app",
-            "image": "708287751177.dkr.ecr.us-east-1.amazonaws.com/nodejs-app:latest",
+            "image": "708287751177.dkr.ecr.us-east-1.amazonaws.com/ngapro-app:latest",
             "cpu": 0,
             "portMappings": [
                 {
@@ -24,18 +24,18 @@
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/demo",
+                    "awslogs-group": "/ecs/ngapro",
                     "awslogs-region": "us-east-1",
                     "awslogs-stream-prefix": "app"
                 }
             }
         }
     ],
-    "family": "demo-app",
-    "taskRoleArn": "arn:aws:iam::708287751177:role/demo-ecs-task-role20240201101018408800000002",
-    "executionRoleArn": "arn:aws:iam::708287751177:role/demo-ecs-exec-role20240201101018408800000001",
+    "family": "ngapro-app",
+    "taskRoleArn": "arn:aws:iam::708287751177:role/ngapro-ecs-task-role20240209072927326200000002",
+    "executionRoleArn": "arn:aws:iam::708287751177:role/ngapro-ecs-exec-role20240209072927326300000003",
     "networkMode": "awsvpc",
-    "revision": 1,
+    "revision": 2,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -71,7 +71,7 @@
     ],
     "cpu": "256",
     "memory": "512",
-    "registeredAt": "2024-02-01T10:10:21.876Z",
+    "registeredAt": "2024-02-09T07:29:29.963Z",
     "registeredBy": "arn:aws:iam::708287751177:root",
     "tags": []
 }
