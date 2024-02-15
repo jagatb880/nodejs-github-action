@@ -2,42 +2,43 @@ const express = require('express');
 const AWS = require('aws-sdk');
 
 const app = express();
-const port = 5000;
+const port = process.env.port || 5000;
 
 // Set your AWS region
-AWS.config.update({ region: 'us-east-1' });
+AWS.config.update({ region: 'us-east-2' });
 
 // Function to fetch secrets from AWS Secrets Manager
-async function getSecrets(secretName) {
-    const secretsManager = new AWS.SecretsManager();
+// async function getSecrets(secretName) {
+//     const secretsManager = new AWS.SecretsManager();
 
-    try {
-        const data = await secretsManager.getSecretValue({ SecretId: secretName }).promise();
-        const secretString = data.SecretString;
+//     try {
+//         const data = await secretsManager.getSecretValue({ SecretId: secretName }).promise();
+//         const secretString = data.SecretString;
 
-        return JSON.parse(secretString);
-    } catch (error) {
-        console.error(`Error fetching secret "${secretName}":`, error);
-        throw error;
-    }
-}
+//         return JSON.parse(secretString);
+//     } catch (error) {
+//         console.error(`Error fetching secret "${secretName}":`, error);
+//         throw error;
+//     }
+// }
 
 // Example usage in an asynchronous function
 async function main() {
-    const secretName = 'my-secret';
+    console.log("I am inside main")
+    // const secretName = 'my-secret';
 
-    try {
-        const secrets = await getSecrets(secretName);
-        console.log('Secrets:', secrets);
+    // try {
+    //     const secrets = await getSecrets(secretName);
+    //     console.log('Secrets:', secrets);
 
-        // Use the secrets in your application logic
-        // For example:
-        console.log('Key1:', secrets.db_name);
-        console.log('Key2:', secrets.username);
-        console.log('Key3:', secrets.password);
-    } catch (error) {
-        console.error('Error:', error.message);
-    }
+    //     // Use the secrets in your application logic
+    //     // For example:
+    //     console.log('Key1:', secrets.db_name);
+    //     console.log('Key2:', secrets.username);
+    //     console.log('Key3:', secrets.password);
+    // } catch (error) {
+    //     console.error('Error:', error.message);
+    // }
 }
 
 // Run the main function
